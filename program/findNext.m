@@ -1,4 +1,7 @@
 function ind = findNext(y, ll, lzero)
+    global deriv;
+    
+    
     i = y;
     maxl = 0;
     maxr = 0;
@@ -27,4 +30,22 @@ function ind = findNext(y, ll, lzero)
 %         val = maxr;
         ind = maxir;
     end
+    
+    deriv.add(ind-y);
+    qsize = 10;
+    if deriv.size() > qsize
+        deriv.remove();
+        
+        sub = 0;
+        for i = 0:qsize-1
+            sub = sub + deriv.get(i);
+        end
+        sub = abs(sub - (qsize-1) * deriv.getLast());
+        if sub > qsize*30
+            ind = 0;
+            t = sub/qsize
+        end
+    end
+    
+    
 end

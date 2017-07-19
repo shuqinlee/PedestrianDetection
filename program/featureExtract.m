@@ -1,7 +1,7 @@
 %% read a picture into gray
 
 % test path: /Users/shuqinlee/Documents/PROJECT/Transportation/o3.png
-rgb = imread('/Users/shuqinlee/Documents/PROJECT/Transportation/o3.png');
+rgb = imread('../MPTestFile/o3.png');
 % imshow(rgb);
 gray = rgb2gray(rgb);
 % imshow(gray);

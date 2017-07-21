@@ -1,5 +1,5 @@
 %% get filter values
-sigma = 30;
+sigma = 25;
 sigma4 = sigma*4;
 [X, result] = gaussianDD(sigma);
 %% read a picture into gray matrix
@@ -48,7 +48,7 @@ while x < 3660 && y ~= 0
     y = findNext(y, scaleConv(x, :), lzero);
     p(x) = y;
     if y == 0
-        x
+        disp(['Exit at ', int2str(x)]);
     end
 end
 

@@ -1,15 +1,25 @@
+%% using marked pics
+
+
 %% get filter values
 sigma = 25;
 sigma4 = sigma*4;
 [X, result] = gaussianDD(sigma);
 %% read a picture into gray matrix
 
-rgb = imread('../MPTestFile/o3.png');
+rgb2 = imread('../MP_marked/o2.marked.png');
 figure(1)
-imshow(rgb);
-gray = rgb2gray(rgb);
+imshow(rgb2);
+gray2 = rgb2gray(rgb2);
 figure(2);
-imshow(gray);
+imshow(gray2);
+
+rgb3 = imread('../MP_marked/o3.marked.png');
+figure(1)
+imshow(rgb3);
+gray3 = rgb2gray(rgb3);
+figure(2);
+imshow(gray3);
 
 %% pic convolution and plot the convolution result
 
@@ -28,6 +38,21 @@ s = rescale(scaleConv);
 imshow(uint8(s));
 title(['sigma' '=' int2str(sigma)]);
 hold on
+%%
+for i = 1: 3660
+    for j = 1: 1280
+    end
+end
+
+
+
+
+
+
+
+
+
+
 
 %% find path with given entry 
 x = 554; 
@@ -49,7 +74,6 @@ while x < 3660 && y ~= 0
     p(x) = y;
     if y == 0
         disp(['Exit at ', int2str(x)]);
-        
     end
 end
 
@@ -71,21 +95,3 @@ hold off
 % imshow(gray);
 % line(p(entry(1) : x-1), entry(1):x-1, 'LineWidth', 4, 'Color', 'r');
 % hold off
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        

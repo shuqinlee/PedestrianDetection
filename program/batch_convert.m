@@ -7,18 +7,18 @@ sigma4 = sigma*4;
 [X, result] = gaussianDD(sigma);
 %% read a picture into gray matrix
 
-rgb2 = imread('../MP_marked/o2.marked.png');
+rgb2 = imread('../MP_marked/o2.marked.sim.png');
 figure(1)
 imshow(rgb2);
 gray2 = rgb2gray(rgb2);
 figure(2);
 imshow(gray2);
 
-rgb3 = imread('../MP_marked/o3.marked.png');
-figure(1)
+rgb3 = imread('../MP_marked/o3.marked.sim.png');
+figure(3)
 imshow(rgb3);
 gray3 = rgb2gray(rgb3);
-figure(2);
+figure(4);
 imshow(gray3);
 
 %% pic convolution and plot the convolution result

@@ -1,5 +1,6 @@
+global scaleConv;
 %% get filter values
-sigma = 25;
+sigma = 15;
 sigma4 = sigma*4;
 [X, result] = gaussianDD(sigma);
 %% read a picture into gray matrix
@@ -23,10 +24,15 @@ for i = 1:3660
 %     i
 end
 figure(3);
+
 scaleConv = 10000*convResult;
+%%
 s = rescale(scaleConv);
+figure(5)
 imshow(uint8(s));
-title(['sigma' '=' int2str(sigma)]);
+title(['sigma' '=' int2str(25)]);
+
+% title(['sigma' '=' int2str(sigma)]);
 hold on
 
 %% find path with given entry 
@@ -45,7 +51,7 @@ deriv = java.util.LinkedList();
 % after the current time
 while x < 3660 && y ~= 0
     x = x + 1;
-    y = findNext(y, scaleConv(x, :), lzero);
+    y = findNext(y, x, lzero);
     p(x) = y;
     if y == 0
         disp(['Exit at ', int2str(x)]);
@@ -53,7 +59,7 @@ while x < 3660 && y ~= 0
 end
 
 %% draw line on 3 distinct images
-figure(4);
+figure(6);
 hold on 
 imshow(uint8(s));
 line(p(entry(1) : x-1), entry(1):x-1, 'LineWidth', 4, 'Color', 'r');

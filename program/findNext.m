@@ -1,6 +1,7 @@
-function ind = findNext(y, ll, lzero)
+function ind = findNext(y, x, lzero)
     global deriv;
-    
+    global parseRec;
+    global scaleConv;
     
     i = y;
     maxl = 0;
@@ -8,11 +9,13 @@ function ind = findNext(y, ll, lzero)
     maxil = 0;
     maxir = 0;
     
+    ll = scaleConv(x, :);
     while i > 0 && (ll(i)>0) == lzero
         if abs(maxl) < abs(ll(i))
             maxil = i;
             maxl = ll(i);
         end
+        parseRec(x, i) = 1;
         i = i - 1;
     end
     i = y;
@@ -21,6 +24,7 @@ function ind = findNext(y, ll, lzero)
             maxr = ll(i);
             maxir = i;
         end
+        parseRec(x, i) = 1;
         i = i + 1;
     end
     if abs(maxl) > abs(maxr)
@@ -41,7 +45,7 @@ function ind = findNext(y, ll, lzero)
             sub = sub + deriv.get(i);
         end
         sub = abs(sub - (qsize-1) * deriv.getLast());
-        if sub > qsize*30
+        if sub > qsize*50
             ind = 0;
             t = sub/qsize
         end

@@ -1,3 +1,6 @@
+clc;
+clear;
+
 global scaleConv;
 global parseRec;
 global sigma;
@@ -13,8 +16,8 @@ mix = imread('../MP_marked/mix.png');
 
 %% convert image
 scaleConv = convertImg(rgb);
-
 parseRec = zeros(3660, 1280);
+
 pths = cell(1,100);
 pInd = 1;
 
@@ -26,38 +29,15 @@ title(['sigma' '=' int2str(sigma)]);
 for i = 1: 3660
     j = 1;
     while j <= 1280
-        
         if (marked2(i, j, 1) ~= 35 || marked3(i, j, 1) ~= 35) % if has special color
             if parseRec(i, j) == 0
             
                 k = j+20;
-                if marked2(i, k, 1) ~= 35
-                    while k <= 1280 && marked2(i, k, 1) ~= 35
-    %                     parseRec(i, k) = 1;
-    %                     parseRec(i + 2, k) = 1;
-    %                     parseRec(i + 1, k) = 1; % can be refined by skipping 
-                        k = k+1;
-                    end
-    %                 parseRec(i+1, j-1) = 1;
-    %                 parseRec(i+1, k) = 1;
-
-                    parseRec(i, j) = k;
-                    parseRec(i + 1, j-1) = k + 1;
-                    parseRec(i + 2, j) = k;
-                elseif marked3(i, k, 1) ~= 35
-                    while k <= 1280 && marked3(i, k, 1) ~= 35
-    %                     parseRec(i, k) = 1;
-    %                     parseRec(i + 2, k) = 1;
-    %                     parseRec(i + 1, k) = 1; % can be refined by skipping 
-                        k = k+1;
-                    end
-    %                 parseRec(i+1, j-1) = 1;
-    %                 parseRec(i+1, k) = 1;
-                    parseRec(i, j) = k;
-                    parseRec(i + 1, j-1) = k + 1;
-                    parseRec(i + 2, j) = k;
-
-
+                while k <= 1280 && marked2(i, k, 1) ~= 35
+                    k = k+1;
+                end
+                while k <= 1280 && marked3(i, k, 1) ~= 35
+                    k = k+1;
                 end
                 mid = floor((j + k)/2);
 
@@ -65,8 +45,8 @@ for i = 1: 3660
                 [pth, x] = findPath([i,mid]);
                 pths{pInd} = {pth(i:x-1), i, x-1};
                 line(pth(i:x-1), i: x-1, 'LineWidth', 4, 'Color', 'r');
-
-                pInd = pInd + 1
+                pInd
+                pInd = pInd + 1;
                 disp(['i: ', int2str(i), ', j: ', int2str(j) , ', k:', int2str(k)]);
                 j = k;
             elseif parseRec(i, j) ~= 1

@@ -1,6 +1,11 @@
+clc;
+clear;
+
 global scaleConv;
 global parseRec;
 global sigma;
+global marked2;
+global marked3;
 
 sigma = 25;
 %% read files
@@ -11,8 +16,8 @@ mix = imread('../MP_marked/mix.png');
 
 %% convert image
 scaleConv = convertImg(rgb);
-
 parseRec = zeros(3660, 1280);
+
 pths = cell(1,100);
 pInd = 1;
 
@@ -24,39 +29,46 @@ title(['sigma' '=' int2str(sigma)]);
 for i = 1: 3660
     j = 1;
     while j <= 1280
-        
         if (marked2(i, j, 1) ~= 35 || marked3(i, j, 1) ~= 35) % if has special color
             if parseRec(i, j) == 0
             
                 k = j+20;
-                if marked2(i, k, 1) ~= 35
-                    while k <= 1280 && marked2(i, k, 1) ~= 35
-    %                     parseRec(i, k) = 1;
-    %                     parseRec(i + 2, k) = 1;
-    %                     parseRec(i + 1, k) = 1; % can be refined by skipping 
-                        k = k+1;
-                    end
-    %                 parseRec(i+1, j-1) = 1;
-    %                 parseRec(i+1, k) = 1;
-
-                    parseRec(i, j) = k;
-                    parseRec(i + 1, j-1) = k + 1;
-                    parseRec(i + 2, j) = k;
-                elseif marked3(i, k, 1) ~= 35
-                    while k <= 1280 && marked3(i, k, 1) ~= 35
-    %                     parseRec(i, k) = 1;
-    %                     parseRec(i + 2, k) = 1;
-    %                     parseRec(i + 1, k) = 1; % can be refined by skipping 
-                        k = k+1;
-                    end
-    %                 parseRec(i+1, j-1) = 1;
-    %                 parseRec(i+1, k) = 1;
-                    parseRec(i, j) = k;
-                    parseRec(i + 1, j-1) = k + 1;
-                    parseRec(i + 2, j) = k;
-
-
+                while k <= 1280 && marked2(i, k, 1) ~= 35
+                    k = k+1;
                 end
+                while k <= 1280 && marked3(i, k, 1) ~= 35
+                    k = k+1;
+                end
+%                 if marked2(i, k, 1) ~= 35
+%                     while k <= 1280 && marked2(i, k, 1) ~= 35
+%     %                     parseRec(i, k) = 1;
+%     %                     parseRec(i + 2, k) = 1;
+%     %                     parseRec(i + 1, k) = 1; % can be refined by skipping 
+%                         k = k+1;
+%                     end
+%     %                 parseRec(i+1, j-1) = 1;
+%     %                 parseRec(i+1, k) = 1;
+% 
+% %                     parseRec(i, j) = k;
+% %                     parseRec(i + 1, j-1) = k + 1;
+% %                     parseRec(i + 2, j) = k;
+%                 elseif marked3(i, k, 1) ~= 35
+% %                     while k <= 1280 && marked3(i, k, 1) ~= 35
+% %     %                     parseRec(i, k) = 1;
+% %     %                     parseRec(i + 2, k) = 1;
+% %     %                     parseRec(i + 1, k) = 1; % can be refined by skipping 
+% %                         k = k+1;
+% %                     end
+%     %                 parseRec(i+1, j-1) = 1;
+%     %                 parseRec(i+1, k) = 1;
+%     
+%     
+% %                     parseRec(i, j) = k;
+% %                     parseRec(i + 1, j-1) = k + 1;
+% %                     parseRec(i + 2, j) = k;
+% 
+% 
+%                 end
                 mid = floor((j + k)/2);
 
                 % start to find path
@@ -69,12 +81,9 @@ for i = 1: 3660
                 j = k;
             elseif parseRec(i, j) ~= 1
                 j = parseRec(i, j);
-                
-        elseif parseRec(i, j) ~= 0 && parseRec(i, j) ~= 1
-            if j == 974
-                disp('!');
+            else
+                j = j + 1;
             end
-            j = parseRec(i, j);
         else
             j = j + 1;
         end

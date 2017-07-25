@@ -14,8 +14,8 @@ function [p, x] = findPath(entry)
 
     % after the current time
     while x < 3660 && y ~= 0
-        x = x + 1;
         y = findNext(y, x, lzero);
+        x = x + 1;
         p(x) = y;
         if y == 0
             disp(['Exit at ', int2str(x)]);

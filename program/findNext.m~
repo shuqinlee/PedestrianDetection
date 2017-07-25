@@ -18,7 +18,6 @@ function ind = findNext(y, x, lzero)
             maxl = ll(i);
         end
         i = i - 1;
-        
     end
     left = i + 1;
     i = y;
@@ -27,19 +26,15 @@ function ind = findNext(y, x, lzero)
             maxr = ll(i);
             maxir = i;
         end
-       
         i = i + 1;
-        
     end
-    right = i - 1;
+    right = min([1280, i]);
+    
     if abs(maxl) > abs(maxr)
-%         val = maxl;
         ind = maxil;
     else
-%         val = maxr;
         ind = maxir;
     end
-%     parseRec(x, left) = right + 1;
     
     deriv.add(ind-y);
     qsize = 10;
@@ -54,27 +49,31 @@ function ind = findNext(y, x, lzero)
         if sub > qsize*50
             ind = 0;
             t = sub/qsize
+            return
         end
     end
-    if ind~= 0
-        if (marked2(x, y, 1) ~= 35 || marked3(x, y, 1) ~= 35) && ...
-                (marked2(x, ind, 1) == 35 && marked3(x, ind, 1) == 35)
+    if (marked2(x, y, 1) ~= 35 || marked3(x, y, 1) ~= 35) && ...
+            (marked2(x, ind, 1) == 35 && marked3(x, ind, 1) == 35)
             disp('max val not colored!');
-        end
+            
     end
-    blockColoring(x, ind);
-    if (marked2(x, right, 1) ~= 35 || marked3(x, right, 1) ~= 35)
-        while  marked2(x, right, 1) ~= 35
-            right = right + 1;
-        end
-        while  marked3(x, right, 1) ~= 35
-            right = right + 1;
-        end
+    [lineL, lineR] = blockColoring(x, ind);
+    if(lineL ~= 0)
+        left = min(left, lineL);
+        right = max(right, lineR);
     end
+    parseRec(x, left) = right;     
+%     disp(['x: ' int2str(x) ...
+%         ', left:' int2str(left) ...
+%         ',right: ' int2str(right)]);
+%     if (marked2(x, right, 1) ~= 35 || marked3(x, right, 1) ~= 35)
+%         while  marked2(x, right, 1) ~= 35
+%             right = right + 1;
+%         end
+%         while  marked3(x, right, 1) ~= 35
+%             right = right + 1;
+%         end
+%     end
 %     left
 %     right
-    disp(['left:' int2str(left) ',right: ' int2str(right)]);
-    parseRec(x, left) = right + 1;
-    
-    
 end

@@ -2,6 +2,8 @@ function ind = findNext(y, x, lzero)
     global deriv;
     global parseRec;
     global scaleConv;
+    global marked2;
+    global marked3;
     
     i = y;
     maxl = 0;
@@ -15,10 +17,6 @@ function ind = findNext(y, x, lzero)
             maxil = i;
             maxl = ll(i);
         end
-%         if parseRec(x, i) == 0
-%             parseRec(x, i) = 1;
-%         end
-        blockColoring(x, i);
         i = i - 1;
         
     end
@@ -29,11 +27,7 @@ function ind = findNext(y, x, lzero)
             maxr = ll(i);
             maxir = i;
         end
-
-%         if parseRec(x, i) == 0
-%             parseRec(x, i) = 1;
-%         end
-        blockColoring(x, i);
+       
         i = i + 1;
         
     end
@@ -62,6 +56,25 @@ function ind = findNext(y, x, lzero)
             t = sub/qsize
         end
     end
+    if ind~= 0
+        if (marked2(x, y, 1) ~= 35 || marked3(x, y, 1) ~= 35) && ...
+                (marked2(x, ind, 1) == 35 && marked3(x, ind, 1) == 35)
+            disp('max val not colored!');
+        end
+    end
+    blockColoring(x, ind);
+    if (marked2(x, right, 1) ~= 35 || marked3(x, right, 1) ~= 35)
+        while  marked2(x, right, 1) ~= 35
+            right = right + 1;
+        end
+        while  marked3(x, right, 1) ~= 35
+            right = right + 1;
+        end
+    end
+%     left
+%     right
+    disp(['x: ' int2str(x) 'left:' int2str(left) ',right: ' int2str(right)]);
+    parseRec(x, left) = right + 1;
     
     
 end

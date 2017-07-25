@@ -15,18 +15,29 @@ function ind = findNext(y, x, lzero)
             maxil = i;
             maxl = ll(i);
         end
-        parseRec(x, i) = 1;
+%         if parseRec(x, i) == 0
+%             parseRec(x, i) = 1;
+%         end
+        blockColoring(x, i);
         i = i - 1;
+        
     end
+    left = i + 1;
     i = y;
     while i < 1281 && (ll(i)>0) == lzero 
         if abs(maxr) < abs(ll(i))
             maxr = ll(i);
             maxir = i;
         end
-        parseRec(x, i) = 1;
+
+%         if parseRec(x, i) == 0
+%             parseRec(x, i) = 1;
+%         end
+        blockColoring(x, i);
         i = i + 1;
+        
     end
+    right = i - 1;
     if abs(maxl) > abs(maxr)
 %         val = maxl;
         ind = maxil;
@@ -34,6 +45,7 @@ function ind = findNext(y, x, lzero)
 %         val = maxr;
         ind = maxir;
     end
+%     parseRec(x, left) = right + 1;
     
     deriv.add(ind-y);
     qsize = 10;

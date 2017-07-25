@@ -15,15 +15,17 @@ function ind = findNext(y, x, lzero)
             maxil = i;
             maxl = ll(i);
         end
-        parseRec
+        parseRec(x, i) = 1;
         i = i - 1;
     end
+    left = i + 1;
     i = y;
     while i < 1281 && (ll(i)>0) == lzero 
         if abs(maxr) < abs(ll(i))
             maxr = ll(i);
             maxir = i;
         end
+        parseRec(x, i) = 1;
         i = i + 1;
     end
     if abs(maxl) > abs(maxr)

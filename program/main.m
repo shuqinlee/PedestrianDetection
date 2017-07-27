@@ -3,11 +3,10 @@ clear;
 
 global scaleConv;
 global parseRec;
-global sigma;
 global marked2;
 global marked3;
 
-sigma = 25;
+
 %% read files
 rgb = imread('../MPTestFile/o3.png');
 marked2 = imread('../MP_marked/o2.marked.sim.png');
@@ -15,7 +14,10 @@ marked3 = imread('../MP_marked/o3.marked.sim.png');
 mix = imread('../MP_marked/mix.png');
 
 %% convert image
-scaleConv = convertImg(rgb);
+
+sigma = 25;
+
+scaleConv = convertImg(rgb, sigma);
 parseRec = zeros(3660, 1280);
 
 pths = cell(1,100);
@@ -42,9 +44,9 @@ for i = 1: 3660
                 mid = floor((j + k)/2);
 
                 % start to find path
-                [pth, x] = findPath([i,mid]);
+                [pth, x] = findPath([i,mid],1);
                 pths{pInd} = {pth(i:x-1), i, x-1};
-                line(pth(i:x-1), i: x-1, 'LineWidth', 4, 'Color', 'r');
+                line(pth(i:x-1), i: x-1, 'LineWidth', 1, 'Color', 'r');
                 pInd
                 pInd = pInd + 1;
                 disp(['i: ', int2str(i), ', j: ', int2str(j) , ', k:', int2str(k)]);
@@ -68,7 +70,7 @@ hold on
 imshow(mix);
 title(['sigma' '=' int2str(sigma)]);
 for i = 1:pInd-1
-    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 4, 'Color', 'r');
+    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 1, 'Color', 'r');
 end
 hold off
 
@@ -79,7 +81,7 @@ s = rescale(scaleConv);
 imshow(uint8(s));
 title(['sigma' '=' int2str(sigma)]);
 for i = 1:pInd-1
-    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 4, 'Color', 'r');
+    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 1, 'Color', 'r');
 end
 hold off
 
@@ -89,7 +91,7 @@ hold on
 imshow(marked3)
 title(['sigma' '=' int2str(sigma)]);
 for i = 1:pInd-1
-    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 4, 'Color', 'r');
+    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 1, 'Color', 'r');
 end
 hold off
 
@@ -99,7 +101,7 @@ hold on
 imshow(marked3)
 title(['sigma' '=' int2str(sigma)]);
 for i = 1:pInd-1
-    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 4, 'Color', 'r');
+    line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 1, 'Color', 'r');
 end
 hold off
 

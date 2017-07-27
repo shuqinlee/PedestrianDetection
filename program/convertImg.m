@@ -1,6 +1,6 @@
 %% convolute the image with laplase gaussian filter
-function scaleConv = convertImg(rgb)
-    global sigma;
+function scaleConv = convertImg(rgb, sigma)
+
     fileName = ['scale_' int2str(sigma) '.mat'];
     if exist(fileName, 'file') == 2
         s = load(fileName);

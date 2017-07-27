@@ -11,12 +11,7 @@ function ind = findNext(y, x, lzero, withMark)
     maxil = 0;
     maxir = 0;
     
-    if x == 107
-        disp('!');
-    end
     % find max at left
-    
-
     ll = scaleConv(x, :);
     while i > 0 && (ll(i)>0) == lzero && ll(i) ~= 0
 %         if abs(maxl) < abs(ll(i))
@@ -29,7 +24,7 @@ function ind = findNext(y, x, lzero, withMark)
     
     % find max at right
     i = y;
-    while i < 1281 && (ll(i)>0) == lzero && ll(i) ~= 0
+    while i < 1281 && (ll(i)>0) == lzero 
 %         if abs(maxr) < abs(ll(i))
 %             maxr = ll(i);
 %             maxir = i;
@@ -38,16 +33,15 @@ function ind = findNext(y, x, lzero, withMark)
     end
     right = min([1280, i]);
     if lzero
-        [val, ind] = max(ll(left:right-1));
+        [val, ind] = max(ll(left:right-1))
     else
         [val, ind] = min(ll(left:right-1))
     end
-    if size(ind, 2) == 0
-        ind = 0;
-        return;
+    
+    if x == 105
+        disp('!');
     end
-    ind = ind + left - 1;
-   
+        
     
     
 %     if abs(maxl) > abs(maxr)

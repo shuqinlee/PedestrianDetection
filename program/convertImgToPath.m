@@ -33,7 +33,7 @@ for i = 1:3660
             pInd
             pInd = pInd + 1;
             disp(['i: ', int2str(i), ', j: ', int2str(j) , ', jump to:', int2str(parseRec(i, j))]);
-            pth(i:x-1)
+%             pth(i:x-1);
             if j == 0
                 continue;
             end

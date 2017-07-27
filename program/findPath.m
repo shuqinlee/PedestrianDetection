@@ -23,5 +23,6 @@ function [p, x] = findPath(entry, withMark)
             disp(['Exit at ', int2str(x)]);
         end
     end
+    x = x-1;
     
 end

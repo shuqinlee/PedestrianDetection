@@ -37,16 +37,41 @@ function ind = findNext(y, x, lzero, withMark)
         i = i + 1;
     end
     right = min([1280, i]);
-    if lzero
-        [val, ind] = max(ll(left:right-1));
+    l = left;
+    r = right;
+    
+    width = 3;
+    
+    if y - left > width
+        lVal = abs(ll(y-width));
     else
-        [val, ind] = min(ll(left:right-1))
+        lVal = 5000;
+    end
+    
+    if right - y > (width + 1)
+        rVal = abs(ll(y+width));
+    else
+        rVal = 5000;
+    end
+    
+    
+    if lVal < abs(ll(y)) 
+        l = y - width;
+    end
+    if rVal < abs(ll(y))
+        r = y + width+1;
+    end
+    
+    if lzero
+        [val, ind] = max(ll(l:r-1));
+    else
+        [val, ind] = min(ll(l:r-1));
     end
     if size(ind, 2) == 0
         ind = 0;
         return;
     end
-    ind = ind + left - 1;
+    ind = ind + l - 1;
    
     
     
@@ -66,7 +91,7 @@ function ind = findNext(y, x, lzero, withMark)
             sub = sub + deriv.get(i);
         end
         sub = abs(sub - (qsize-1) * deriv.getLast());
-        if sub > qsize*50
+        if sub > qsize*30
             ind = 0;
             t = sub/qsize
             return

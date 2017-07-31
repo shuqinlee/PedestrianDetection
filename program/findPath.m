@@ -3,6 +3,7 @@
 % vertival coordinate index
 function [p, x] = findPath(entry, withMark)
     global scaleConv;
+    global parseRec;
     x = entry(1);
     y = entry(2);
     lzero = (scaleConv(x,y) > 0);

@@ -6,6 +6,8 @@ function ind = findNext(y, x, lzero, withMark)
     global marked3;
     
     i = y;
+    s1 = size(scaleConv, 1);
+    s2 = size(scaleConv, 2);
     
     % find max at left
     ll = scaleConv(x, :);
@@ -16,10 +18,10 @@ function ind = findNext(y, x, lzero, withMark)
     
     % find max at right
     i = y;
-    while i < 1281 && (ll(i)>0) == lzero && ll(i) ~= 0
+    while i < s2+1 && (ll(i)>0) == lzero && ll(i) ~= 0
         i = i + 1;
     end
-    right = min([1280, i]);
+    right = min([s2, i]);
     l = left;
     r = right;
     
@@ -46,20 +48,16 @@ function ind = findNext(y, x, lzero, withMark)
     end
     
     if lzero
-        [val, ind] = max(ll(l:r-1));
+        [~, ind] = max(ll(l:r-1));
     else
-        [val, ind] = min(ll(l:r-1));
+        [~, ind] = min(ll(l:r-1));
     end
     if size(ind, 2) == 0
         ind = 0;
         return;
     end
     ind = ind + l - 1;
-   
-    
-    
-
-%     
+       
     % check if validate
     deriv.add(ind-y);
     qsize = 10;
@@ -77,7 +75,9 @@ function ind = findNext(y, x, lzero, withMark)
         end
     end
     
-    if parseRec(x, 
+    if parseRec(x, ind) ~= 0
+        ind = 0;
+    end
     
     % verify mode
     if withMark == 1

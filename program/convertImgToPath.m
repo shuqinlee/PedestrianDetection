@@ -24,9 +24,7 @@ for i = 1:3660
     while j > 0 && j < right
         if parseRec(i, j) == 0
             % start to find path
-            if j == 271
-                disp('!')
-            end
+
             [pth, x] = findPath([i,j], 0);
             pths{pInd} = {pth(i:x-1), i, x-1};
             line(pth(i:x-1), i: x-1, 'LineWidth', 1, 'Color', 'r');

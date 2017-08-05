@@ -5,6 +5,7 @@ function [x, posResult] = gaussianDD(sigma)
     for i = 1:size(x,2)
         posResult(i) = -feval(gdd, x(i));
     end
+    figure(2)
     plot(x,posResult)
 end
 

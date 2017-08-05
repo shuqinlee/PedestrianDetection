@@ -6,8 +6,11 @@
 function [left, right] = blockColoring(i,j)
     global parseRec;
     global marked2;
+    
+    s2 = size(parseRec, 2);
+    
     global marked3; % marked images should be looked at
-    if (j > 0) &&(j < 1281) && (marked2(i, j, 1) ~= 35 || marked3(i, j, 1) ~= 35)
+    if (j > 0) &&(j < s2) && (marked2(i, j, 1) ~= 35 || marked3(i, j, 1) ~= 35)
         left = j;
         right = j;
         if marked2(i, j, 1) ~= 35 
@@ -22,15 +25,13 @@ function [left, right] = blockColoring(i,j)
         left = left + 1;
         
         if (marked2(i-1, left+1, 1) == 35 && marked3(i-1, left+1, 1) == 35) % line 1
-            while right <= 1280 && marked2(i, right, 1) ~= 35  
+            while right <= s2 && marked2(i, right, 1) ~= 35  
                 right = right + 1; 
             end
-            while right <= 1280 && marked3(i, right, 1) ~= 35      
+            while right <= s2 && marked3(i, right, 1) ~= 35      
                 right = right + 1; 
             end
-            if right == 1067
-                disp('!')
-            end
+
             mat = ones(1, right-left) * right;
             parseRec(i, left:right-1) = mat;
             parseRec(i+1, left-1) = right + 1;

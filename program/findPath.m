@@ -3,11 +3,12 @@
 % vertival coordinate index
 function [p, x] = findPath(entry, withMark)
     global scaleConv;
-    global parseRec;
+
     x = entry(1);
     y = entry(2);
     lzero = (scaleConv(x,y) > 0);
-    p = zeros(1, 3660);
+    s1 = size(scaleConv, 1);
+    p = zeros(1, s1);
     p(x) = y;
 
 
@@ -15,7 +16,7 @@ function [p, x] = findPath(entry, withMark)
     deriv = java.util.LinkedList();
 
     % after the current time
-    while x < 3660 && y ~= 0
+    while x < s1 && y ~= 0
         y = findNext(y, x, lzero, withMark);
         p(x) = y;
         x = x + 1;

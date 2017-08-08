@@ -1,4 +1,4 @@
-%% convolute the image with laplase gaussian filter
+%% convolute the gray image with laplase gaussian filter
 % pth is the saving directory
 % pth's like: '../ConvolutionData/Batch1/216/2/'
 function scaleConv = convertImg(rgb, sigma, pth)

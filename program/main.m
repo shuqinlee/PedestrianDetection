@@ -88,7 +88,7 @@ hold off
 % show on 2nd marked img
 figure(3)
 hold on
-imshow(marked3)
+imshow(marked3);
 title(['sigma' '=' int2str(sigma)]);
 for i = 1:pInd-1
     line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 1, 'Color', 'r');
@@ -98,7 +98,7 @@ hold off
 % show on 3rd marked img
 figure(4)
 hold on
-imshow(marked3)
+imshow(marked3);
 title(['sigma' '=' int2str(sigma)]);
 for i = 1:pInd-1
     line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 1, 'Color', 'r');

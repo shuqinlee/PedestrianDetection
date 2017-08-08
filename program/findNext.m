@@ -25,7 +25,7 @@ function ind = findNext(y, x, lzero, withMark)
     l = left;
     r = right;
     
-    width = 3;
+    width = 10;
     
     if y - left > width
         lVal = abs(ll(y-width));
@@ -75,6 +75,7 @@ function ind = findNext(y, x, lzero, withMark)
         end
     end
     
+    % if it has already been drawn, stop tracing
     if parseRec(x, ind) ~= 0
         ind = 0;
     end

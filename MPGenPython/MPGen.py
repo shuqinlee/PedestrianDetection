@@ -44,7 +44,41 @@ class MPGenerator:
 		frame_counter = 0
 		
 		success, frame = self.video.read()
+		delta = y2 - y1
+		
+		
+		if not self._isInterlaced:
+			arr = np.ones((1, delta))
+			while success:
+				frame = frame[y1 : y2].transpose(1, 0, 2)
 
+				for col in range(width):
+					c = frame[col] # y2-y1 * 3
+					r = arr * c / (y2 - y1)
+					vert_condensed[frame_counter, col, :] = r
+				success, frame = self.video.read()
+				frame_counter += 1
+		else:
+			arr1 = np.matrix([ int( i % 2 == 0) for i in range(delta) ]) # 1 * (y2-y1)
+			arr2 = arr1 * (-1) + 1
+			while success:
+				frame = frame[y1 : y2].transpose(1, 0, 2)
+				for col in range(width):
+					c = frame[col] # (y2-y1) * 3
+					r1, r2 = (arr1 * c) / np.sum(arr1), (arr2 * c) / np.sum(arr2)
+#					r1, r2 = (arr1 * c), (arr2 * c) 
+
+#					print(r1, r2)
+				
+					vert_condensed[frame_counter, col, :] = r1
+					vert_condensed[frame_counter+1, col, :] = r2
+					
+					
+					
+				success, frame = self.video.read()
+				frame_counter += 2	
+					
+		'''
 		if not self._isInterlaced:
 			while success:
 				for col in range(width):
@@ -56,7 +90,7 @@ class MPGenerator:
 						sum_b+=frame[row,col][0];
 						sum_g+=frame[row,col][1];
 						sum_r+=frame[row,col][2];
-						''' modify later'''
+						''modify later''
 					b = sum_b / (y2-y1);
 					g = sum_g / (y2-y1);
 					r = sum_r / (y2-y1);
@@ -64,7 +98,7 @@ class MPGenerator:
 					value = np.array([b , g, r])
 					vert_condensed[frame_counter, col, :] = value
  
-					''' modify later '''
+					'' modify later ''
 				success, frame = self.video.read()
 				frame_counter += 1
 				
@@ -83,29 +117,31 @@ class MPGenerator:
 						e_sum_g += frame[row,col][1];
 						e_sum_r += frame[row,col][2];
 						
-						''' modeify later'''
+
 					for row in range(y1 + 1, y2 + 1, 2):
 						o_sum_b+=frame[row,col][0]
 						o_sum_g+=frame[row,col][1]
 						o_sum_r+=frame[row,col][2]
-						'''modify later'''
+
 					b = (e_sum_b * 2) / (y2-y1)
 					g = (e_sum_g * 2) / (y2-y1)
 					r = (e_sum_r * 2) / (y2-y1)
 					value = np.array([b, g, r])
 					vert_condensed[frame_counter * 2, col, :] = value
 
-					''' modify later'''
+
 					b = (o_sum_b*2) / (y2-y1)
 					g = (o_sum_g*2) / (y2-y1)
 					r = (o_sum_r*2) / (y2-y1)
 					value = np.array([b, g, r])
 					vert_condensed[(frame_counter*2)+1, col, :] = value
-					''' modify later'''
+
 					
 				frame_counter += 1
 				print(frame_counter)
 				success, frame = self.video.read()
+				'''
+		
 		cv.imwrite(self._savePth, vert_condensed)
 
 

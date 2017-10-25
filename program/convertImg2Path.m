@@ -2,7 +2,7 @@
 % to convert a photo belonging to a video into full-path pic
 % inPth: the pic to read in 
 % outPth: the directory path to put convoulution result in
-function convertImg2Path(inPth, outPth, sigma)
+function convertImg2Path(inPth, scalePth, ppth, sigma)
     global scaleConv;
     global parseRec;
     
@@ -10,7 +10,7 @@ function convertImg2Path(inPth, outPth, sigma)
     s1 = size(rgb, 1);
     s2 = size(rgb, 2);
 
-    scaleConv = convertImg(rgb, sigma, outPth);
+    scaleConv = convertImg(rgb, sigma, scalePth);
     parseRec = zeros(s1, s2);
 
     pths = cell(1, 4000);
@@ -35,7 +35,7 @@ function convertImg2Path(inPth, outPth, sigma)
                 pInd = pInd + 1;
                 disp(['i: ', int2str(i), ', j: ', int2str(j) , ...
                     ', jump to:', int2str(parseRec(i, j))]);
-                pth(i:x-1)
+                % pth(i:x-1)
                 if j == 0
                     continue;
                 end

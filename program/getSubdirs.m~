@@ -1,0 +1,8 @@
+function fileNames = getSubdirs(dirName)
+
+%     mpfileRoot = '/home/shuqinlee/Documents/MPOutput/imgResult';
+%     processRoot = '/home/shuqinlee/Documents/MatlabOutput';
+%     dirP = fullfile(dirName);
+%     dirOp = dir(fullfile(dirP, '*'));
+%     fileNames = {dirOp.name};
+end

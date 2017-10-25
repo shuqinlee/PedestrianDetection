@@ -3,11 +3,11 @@
 % pth's like: '../ConvolutionData/Batch1/216/2/'
 function scaleConv = convertImg(rgb, sigma, pth)
     
-%     fileName = [pth 'scale_' int2str(sigma) '.mat'];
-%     if exist(fileName, 'file') == 2
-%         s = load(fileName);
-%         scaleConv = s.scaleConv;
-%     else
+    fileName = [pth 'scale_' int2str(sigma) '.mat'];
+    if exist(fileName, 'file') == 2
+        s = load(fileName);
+        scaleConv = s.scaleConv;
+    else
         % get filter values
         sigma4 = sigma*4;
         [~, result] = gaussianDD(sigma);
@@ -30,10 +30,10 @@ function scaleConv = convertImg(rgb, sigma, pth)
         end
 
         scaleConv = 10000*convResult;
-%         if exist(pth, 'dir') ~= 2
-%             mkdir(pth);
-%         end
+        if exist(pth, 'dir') ~= 2
+            mkdir(pth);
+        end
         imshow(scaleConv);
-%         save(fileName, 'scaleConv');
-%     end       
+        save(fileName, 'scaleConv');
+    end       
 end

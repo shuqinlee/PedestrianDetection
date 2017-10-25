@@ -47,13 +47,6 @@ end
 
 
 
-
-
-
-
-
-
-
 %% find path with given entry 
 x = 554; 
 y = 965;

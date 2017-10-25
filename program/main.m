@@ -78,7 +78,7 @@ hold off
 figure(2)
 hold on
 s = rescale(scaleConv);
-imshow(uint8(s));
+imshow(s);
 title(['sigma' '=' int2str(sigma)]);
 for i = 1:pInd-1
     line(pths{i}{1}, pths{i}{2}:pths{i}{3}, 'LineWidth', 1, 'Color', 'r');

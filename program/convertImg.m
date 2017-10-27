@@ -33,7 +33,7 @@ function scaleConv = convertImg(rgb, sigma, pth)
         if exist(pth, 'dir') ~= 2
             mkdir(pth);
         end
-        imshow(scaleConv);
+        
         save(fileName, 'scaleConv');
     end       
 end

@@ -1,0 +1,11 @@
+function in = traceOnImg(color, tracePth, mpPth, destPth)
+in = imread(mpPth);
+t = load(tracePth);
+trace = t.pths;
+for i = 1 : size(trace, 2) - 1
+    for j = trace{i}{2}: trace{i}{3}
+        in(j, trace{i}{1}{j}, :) = color;
+    end
+end
+
+save([destPth, '

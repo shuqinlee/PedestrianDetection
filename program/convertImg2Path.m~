@@ -13,21 +13,16 @@ function convertImg2Path(inPth, scalePth, tPth, sigma)
     scaleConv = convertImg(rgb, sigma, scalePth);
     parseRec = zeros(s1, s2);
 
-    pths = cell(1, 50000);
+    pths = cell(1, 4000);
     pInd = 1;
 
     figure(1);
     hold on
-    % imshow(rgb);
-    % title(['sigma' '=' int2str(sigma)]);
+    imshow(rgb);
+    title(['sigma' '=' int2str(sigma)]);
     left = sigma*4 + 1;
     right = s2 + 1 - sigma*4;
     
-    trace_pth = [tPth 'trace_' num2str(sigma) '.mat'];
-    if exist(trace_pth, 'file') ~= 0 % if already exists
-        disp([trace_pth ' already exist!']);
-        return
-    end
     for i = 1: s1
         j = left;
         while j > 0 && j < right
@@ -38,8 +33,8 @@ function convertImg2Path(inPth, scalePth, tPth, sigma)
                 line(pth(i:x-1), i: x-1, 'LineWidth', 1, 'Color', 'r');
                 pInd
                 pInd = pInd + 1;
-                % disp(['i: ', int2str(i), ', j: ', int2str(j) , ...
-                  %  ', jump to:', int2str(parseRec(i, j))]);
+                disp(['i: ', int2str(i), ', j: ', int2str(j) , ...
+                    ', jump to:', int2str(parseRec(i, j))]);
                 % pth(i:x-1)
                 if j == 0
                     continue;
@@ -52,7 +47,5 @@ function convertImg2Path(inPth, scalePth, tPth, sigma)
     end
     
     % save pths
-    disp('!!');
-    save([tPth 'trace_' num2str(sigma) '.mat'], 'pths');
-    disp('!');
+    save(pths);
 end

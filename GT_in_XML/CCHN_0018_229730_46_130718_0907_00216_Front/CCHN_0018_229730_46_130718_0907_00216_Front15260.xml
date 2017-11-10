@@ -1,0 +1,26 @@
+<annotation verified="no">
+  <folder>CCHN_0018_229730_46_130718_0907_00216_Front</folder>
+  <filename>CCHN_0018_229730_46_130718_0907_00216_Front15260</filename>
+  <path>D:\MyOwnDocuments\UniversityDocuments\&#37073;&#32475;&#23431;\pictures\CCHN_0018_229730_46_130718_0907_00216_Front\CCHN_0018_229730_46_130718_0907_00216_Front15260.jpg</path>
+  <source>
+    <database>Unknown</database>
+  </source>
+  <size>
+    <width>480</width>
+    <height>356</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>side_ride</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <Difficult>0</Difficult>
+    <bndbox>
+      <xmin>392</xmin>
+      <ymin>162</ymin>
+      <xmax>412</xmax>
+      <ymax>196</ymax>
+    </bndbox>
+  </object>
+</annotation>

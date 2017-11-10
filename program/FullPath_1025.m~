@@ -4,21 +4,21 @@ processRoot = '/home/shuqinlee/Documents/MatlabOutput'; % output root
 mpNames = getSubdirs(mpfileRoot);
 
 a = {'o0.png', 'o1.png', 'o2.png', 'o3.png'};
-sigmas = [10 20 30 35]; % to be refined!
+sigmas = [30 20 30 35]; % to be refined!
 for i = 1:size(mpNames, 2)
     if mpNames{i}(1) == 'C'
         % process this video's Motion profile
         name = mpNames{i};
         trace_pth = [processRoot  '/TraceOutput/' name '/'];
         scale_pth = [processRoot  '/ScaleOutput/' name '/']; % ScaleOutput/fileName
-        mp_dir = [mpfileRoot '/' mpNames{i}];
+        mp_dir = [mpfileRoot '/' mpNames{i} '/'];
         if ~exist(trace_pth, 'dir')
             mkdir(trace_pth);
         end
         if ~exist(scale_pth, 'dir')
             mkdir(scale_pth);
         end
-        for j = 1:size(a)
+        for j = 1:size(a, 2)
             pp = [trace_pth a{j}];
             ss = [scale_pth a{j}];
             if ~exist(pp, 'dir')
@@ -31,14 +31,16 @@ for i = 1:size(mpNames, 2)
         
         
         for j = 1:size(a)
+            disp([******Processing file: name '/' a{j}]);
             rr = [mp_dir a{j}]; % source file
             pp = [trace_pth a{j} '/']; % path
             ss = [scale_pth a{j} '/']; % scale
             
             convertImg2Path(rr, ss, pp, sigmas(j))
-            
+            disp(j);
             break
         end
+        
     end
 end
             

@@ -50,9 +50,9 @@ function convertImg2Path(inPth, scalePth, tPth, sigma)
             end
         end
     end
-    
+    pths = pths(1:pInd-1);
     % save pths
-    disp('!!');
+    
     save([tPth 'trace_' num2str(sigma) '.mat'], 'pths');
-    disp('!');
+    
 end

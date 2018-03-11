@@ -4,7 +4,7 @@
 
 以下是一个motion profile的示例：
 
-![o3](./output/MPTestFile/o3 copy.png)
+![o3](./material/o3 copy.png)
 
 
 
@@ -50,3 +50,4 @@
 
 ## HOC 和 深度学习训练
 
+todo

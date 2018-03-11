@@ -4,7 +4,7 @@
 
 以下是一个motion profile的示例：
 
-![o3](./material/o3 copy.png)
+![o3](./material/o3.png)
 
 
 
